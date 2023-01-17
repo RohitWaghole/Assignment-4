@@ -3,7 +3,9 @@ const table = database.table;
 const db = database.connection;
 
 const checkConnection = (request, response) => {
-  response.send("It is working properly");
+  response.send(
+    '<h1><a href="http://localhost:2013/documentation" />Documentation</h1>'
+  );
 };
 
 // GET ALL THE DATA
@@ -54,7 +56,7 @@ const updateEmployeeData = (request, response) => {
   let query = `UPDATE ${table} set EMPLOYEE_NAME=?, AGE=?, SALERY=?, GENDER=? WHERE ID=${id}`;
   try {
     db.query(query, [EMPLOYEE_NAME, AGE, SALERY, GENDER], (error, result) => {
-      if (error) throw err;
+      if (error) throw error;
       response.send(result);
     });
   } catch (err) {
