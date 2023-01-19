@@ -35,15 +35,15 @@ app.listen(2013);
  *          Employee:
  *              type : object
  *              properties:
- *                  ID:
+ *                  id:
  *                      type: integer
- *                  EMPLOYEE_NAME:
+ *                  employeeName:
  *                      type: string
- *                  AGE:
+ *                  age:
  *                      type: integer
- *                  SALERY:
+ *                  salery:
  *                      type: integer
- *                  GENDER:
+ *                  gender:
  *                      type: string
  */
 
@@ -78,7 +78,7 @@ app.listen(2013);
  *            required: true
  *            description: ID required
  *            schema:
- *              type: string
+ *              type: integer
  *      responses:
  *        2013:
  *              description: Fetch the data from MySQL
@@ -122,7 +122,7 @@ app.listen(2013);
  *            required: true
  *            description: Numeric ID required
  *            schema:
- *              type: string
+ *              type: integer
  *      requestBody:
  *          required: true
  *          content:
@@ -148,7 +148,7 @@ app.listen(2013);
  *            required: true
  *            description: ID required
  *            schema:
- *              type: string
+ *              type: integer
  *      responses:
  *        2013:
  *              description: Deleted Successfully!

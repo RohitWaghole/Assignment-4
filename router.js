@@ -1,5 +1,5 @@
 const express = require("express");
-const apis = require("./apiMethods");
+const apis = require("./controller");
 const router = express.Router();
 
 router.get("/", apis.checkConnection);

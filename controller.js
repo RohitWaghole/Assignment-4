@@ -24,7 +24,8 @@ const getAllEmployees = (request, response) => {
 // GET DATA BY PERTICULAR ID
 const getEmployeeById = (request, response) => {
   let id = parseInt(request.params.id);
-  let query = `SELECT * FROM ${table} WHERE ID=${id}`;
+  let query = `SELECT * FROM ${table} WHERE id='${id}'`;
+
   try {
     db.query(query, (err, result) => {
       if (err) throw err;
@@ -37,12 +38,12 @@ const getEmployeeById = (request, response) => {
 
 // ADD DATA INTO TABLE
 const addNewEmployee = (request, response) => {
-  let { EMPLOYEE_NAME, AGE, SALERY, GENDER } = request.body;
-  let query = `INSERT INTO ${table} (EMPLOYEE_NAME, AGE, SALERY, GENDER) VALUES(?,?,?,?)`;
+  let { employeeName, age, salery, gender } = request.body;
+  let query = `INSERT INTO ${table} (id, employeeName, age, salery, gender) VALUES(UNIX_TIMESTAMP(NOW()),?,?,?,?)`;
   try {
-    db.query(query, [EMPLOYEE_NAME, AGE, SALERY, GENDER], (err, result) => {
+    db.query(query, [employeeName, age, salery, gender], (err, result) => {
       if (err) throw err;
-      response.send(result);
+      response.send("Data successfully added!");
     });
   } catch (err) {
     throw err;
@@ -51,13 +52,13 @@ const addNewEmployee = (request, response) => {
 
 // UPDATE DATA IN THE TABLE
 const updateEmployeeData = (request, response) => {
-  let id = request.params.id;
-  let { EMPLOYEE_NAME, AGE, SALERY, GENDER } = request.body;
-  let query = `UPDATE ${table} set EMPLOYEE_NAME=?, AGE=?, SALERY=?, GENDER=? WHERE ID=${id}`;
+  let id = parseInt(request.params.id);
+  let { employeeName, age, salery, gender } = request.body;
+  let query = `UPDATE ${table} set employeeName=?, age=?, salery=?, gender=? WHERE id=${id}`;
   try {
-    db.query(query, [EMPLOYEE_NAME, AGE, SALERY, GENDER], (error, result) => {
+    db.query(query, [employeeName, age, salery, gender], (error, result) => {
       if (error) throw error;
-      response.send(result);
+      response.send("Data Updated Successfully!");
     });
   } catch (err) {
     throw err;
@@ -66,12 +67,12 @@ const updateEmployeeData = (request, response) => {
 
 // DELETE DATA IN THE TABLE
 const deleteEmployeeData = (requst, response) => {
-  let id = requst.params.id;
-  let query = `DELETE FROM ${table} WHERE ID=${id}`;
+  let id = parseInt(requst.params.id);
+  let query = `DELETE FROM ${table} WHERE id=${id}`;
   try {
     db.query(query, (err, result) => {
       if (err) throw err;
-      response.send(result);
+      response.send("Data Deleted Successfully!");
     });
   } catch (err) {
     throw err;
